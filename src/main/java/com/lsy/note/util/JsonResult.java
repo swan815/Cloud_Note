@@ -2,6 +2,8 @@ package com.lsy.note.util;
 
 import java.io.Serializable;
 
+import com.lsy.note.service.UserNotFoundException;
+
 /**
  * 封装JSON返回值，达到统一JSON返回值
  * @author apple
@@ -39,6 +41,13 @@ public class JsonResult implements Serializable {
 		state=ERROR;
 		this.data="";
 		message=e.getMessage();
+	}
+
+	public JsonResult(int state, Throwable e) {
+		this.state = state;
+		this.data="";
+		message=e.getMessage();
+		
 	}
 
 	public int getState() {

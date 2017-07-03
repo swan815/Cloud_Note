@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lsy.note.enity.User;
+import com.lsy.note.service.PasswordException;
+import com.lsy.note.service.UserNotFoundException;
 import com.lsy.note.service.UserService;
 import com.lsy.note.util.JsonResult;
 
@@ -23,6 +25,21 @@ public class UserController {
 		User user = userService.login(name, password);
         return new JsonResult(user);
 	}
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	@ResponseBody
+	public JsonResult handleUserNotFoundException(UserNotFoundException e){
+		e.printStackTrace();
+		return new JsonResult(2,e);//state=2
+	}
+	
+	@ExceptionHandler(PasswordException.class)
+	@ResponseBody
+	public JsonResult handlePasswordException(PasswordException e){
+		e.printStackTrace();
+		return new JsonResult(3,e);//state=3
+	}
+	
 	//@ExceptionHandler 注解方法在控制器方法出现异常时候执行
 	@ExceptionHandler(Exception.class)
 	@ResponseBody
