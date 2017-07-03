@@ -1,5 +1,6 @@
 package com.lsy.note.service.impl;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +27,11 @@ public class UserServiceImpl implements UserService{
 		User user = userDao.findUserByName(name);
 		if (user==null) {
 			throw new UserNotFoundException("查无此人");
-			
 		}
-		if (user.getPassword().equals(password)) {
+		String salt = "Day Day Up!";
+		String pwd = DigestUtils.md5Hex(password+salt);
+		
+		if (user.getPassword().equals(pwd)) {
 			return user;
 		}
 		throw new PasswordException("密码不对");

@@ -53,6 +53,7 @@ function loginAction(){
 		if(result.state==SUCCESS){
 			var user = result.data;
 			console.log(user);
+			//location.href='edit.html';
 		}else if(result.state==2){
 			$('#count').next().html(result.message);
 		}else if(result.state==3){
