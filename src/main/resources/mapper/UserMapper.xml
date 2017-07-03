@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射的namespace必须指定，并且是唯一的，如果有两个映射文件的namespace相同，启动时会报错，
+所谓的启动时在后期和Spring进行整合的时候，启动报错 -->
+<mapper namespace="com.lsy.note.dao.UserDao">
+	<select id="findUserByName" parameterType="string" resultType="com.lsy.note.enity.User">
+	select 
+		cn_user_id as id,
+		cn_user_name as name,
+		cn_user_password as password,
+		cn_user_nick as nick,
+		cn_user_token as token
+	from 
+		cn_user
+	where
+		cn_user_name=#{name}
+	</select>
+
+</mapper>
