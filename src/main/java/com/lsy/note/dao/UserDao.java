@@ -13,4 +13,6 @@ public interface UserDao {
 	
 	int addUser(User user);
 
+	int countUserById(String userId);
+
 }

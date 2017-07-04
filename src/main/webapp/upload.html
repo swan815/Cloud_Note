@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>文件上载</title>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#upload').click(uploadFile);
+	});
+	
+	function uploadFile(){
+		//获取用户选择的file对象
+		var file1=$('#file1')[0].files[0];
+		var file2=$('#file2')[0].files[0];
+		
+		if(!file1){
+			alert('选择第一个文件夹');
+			return;
+		}
+		if(!file2){
+			alert('选择第二个文件夹');
+		}
+		//创建表单对象
+		var form = new FormData();
+		form.append('userfile1',file1);
+		form.append('userfile2',file2);
+		
+		//利用JQuery发送数据
+		$.ajax({
+			url:'user/upload.do',
+			data: form,         //向服务器发送的表单数据
+			type: 'POST',       //发送 method
+			dataType: 'json',   //服务器返回的数据类型
+			contentType: false, 
+			processData: false, 
+			success: function(obj){ //在服务器响应成功时候调用
+				if(obj.state==0){
+					$('#result').html("成功!"); 
+				}
+			},
+			error: function(){
+				alert("通信故障！");
+			}
+		})
+	}
+</script>
+</head>
+<body>
+	<h1>表单上载</h1>
+	<form enctype="multipart/form-data" action="user/upload.do" method="post">
+		<h2>上载文件</h2>
+		<input type="file" name="userfile1"><br>
+		<input type="file" name="userfile2"><br>
+		<input type="submit" value="上载文件">
+	</form>
+	
+	<h1>Ajax文件上载</h1>
+	<input type="file" id="file1"><br>
+	<input type="file" id="file2"><br>
+	<input type="button" id="upload" value="上传文件">
+	<p id="result"></p>
+
+</body>
+</html>

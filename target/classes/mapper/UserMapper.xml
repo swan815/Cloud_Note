@@ -33,5 +33,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{nick}
 		)
 	</insert>
+	
+	<select id="countUserById" parameterType="string" resultType="int">
+		select
+			count(*)
+		from 
+			cn_user
+		where
+			cn_user_id=#{userId}
+	</select>
 
 </mapper>

@@ -23,6 +23,7 @@
 	
 	<util:properties id="config">
 		<prop key="salt">Day Day Up!</prop>
+		<prop key="uploadPath">/Users/apple/Documents/shixun/upload</prop>
 	</util:properties>
 	
 	<context:component-scan base-package="com.lsy.note.service"></context:component-scan>
