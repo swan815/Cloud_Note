@@ -15,5 +15,8 @@ public interface UserService {
 	
 	public User login(String name,String password) 
 			throws UserNotFoundException,PasswordException;
+	
+	public User regist(String name,String nick,String password,String confirm)
+			throws UserExistsException,PasswordException;
 
 }

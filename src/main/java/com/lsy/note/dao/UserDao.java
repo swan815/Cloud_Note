@@ -10,5 +10,7 @@ public interface UserDao {
 	 * @return用户对象，代表用户信息
 	 */
 	User findUserByName(String name);
+	
+	int addUser(User user);
 
 }

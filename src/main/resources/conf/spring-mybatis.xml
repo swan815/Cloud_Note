@@ -42,8 +42,9 @@
 	
 	</bean>
 	
-	<!-- 配置MyBatis的自动接口扫描 -->
+	<!-- 配置MyBatis的自动接口扫描，扫描com.lsy.note.dao，创建所有mapper接口的实例 userDao-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	
 		<property name="basePackage" value="com.lsy.note.dao"></property>
 		
 	</bean>

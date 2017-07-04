@@ -17,5 +17,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where
 		cn_user_name=#{name}
 	</select>
+	
+	<insert id="addUser" parameterType="com.lsy.note.enity.User">
+		insert into cn_user(
+			cn_user_id,
+			cn_user_name,
+			cn_user_password,
+			cn_user_token,
+			cn_user_nick
+		)values(
+			#{id},
+			#{name},
+			#{password},
+			#{token},
+			#{nick}
+		)
+	</insert>
 
 </mapper>

@@ -13,7 +13,7 @@ import com.lsy.note.service.UserService;
 import com.lsy.note.util.JsonResult;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user")//spring mvc组件映射了url与控制器之间的关系
 public class UserController {
 	
 	@Autowired
@@ -25,6 +25,8 @@ public class UserController {
 		User user = userService.login(name, password);
         return new JsonResult(user);
 	}
+	
+	
 	
 	@ExceptionHandler(UserNotFoundException.class)
 	@ResponseBody
@@ -47,4 +49,14 @@ public class UserController {
 		e.printStackTrace();
 		return new JsonResult(e);
 	}
+	
+	@RequestMapping("/regist.do")
+	@ResponseBody
+	public JsonResult regist(String name, String nick, String password,String confirm){
+		User user = userService.regist(name, nick, password, confirm);
+		return new JsonResult(user);
+	}
+	
+	
+	
 }

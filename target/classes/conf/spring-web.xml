@@ -22,6 +22,8 @@
 	<!-- 启动注解版本的Spring MVC -->
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<context:component-scan base-package="com.lsy.note.controller"></context:component-scan>
+	
+	
 </beans>
 
 

@@ -17,6 +17,7 @@
     <init-param>
       <description></description>
       <param-name>contextConfigLocation</param-name>
+      <!-- 读取配置文件，加载spring容器 -->
       <param-value>classpath:conf/spring-*.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>

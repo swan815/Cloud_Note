@@ -7,10 +7,42 @@ $(function(){
 	//console.log('Hello world!');
 	
 	$('#login').click(loginAction);
-	$('#count').blur(checkName);
+	$('#count').focus().blur(checkName);
 	$('#password').blur(checkPassword);
 	
+	//绑定事件
+	
+	$('#regist_button').click(registAction);
+	
 });
+
+function registAction(){
+	
+	var name = $('#regist_username').val();
+	var nick = $('#nickname').val();
+	var password = $('#regist_password').val();
+	var confirm=$('#confirm_password').val();
+	
+	var url = 'user/regist.do';
+	var data = {name:name, nick:nick, password:password, confirm:confirm};
+	console.log(data);
+	$.post(url,data,function(result){
+		if(result.state==SUCCESS){
+			var user = result.data;
+			console.log(user);
+			$('#back').click();
+			$('#count').val(user.name);
+			$('#password').focus();
+			
+			$('#regist_username').val('');
+			$('#nickname').val('');
+			$('#regist_password').val('');
+			$('#confirm_password').val('');
+		}else{
+			alert(result.message);
+		}
+	});
+}
 
 function checkName(){
 	var name = $('#count').val();
@@ -53,7 +85,7 @@ function loginAction(){
 		if(result.state==SUCCESS){
 			var user = result.data;
 			console.log(user);
-			//location.href='edit.html';
+			location.href='edit.html';
 		}else if(result.state==2){
 			$('#count').next().html(result.message);
 		}else if(result.state==3){
