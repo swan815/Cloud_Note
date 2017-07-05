@@ -3,6 +3,10 @@ package com.lsy.note.controller;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -81,9 +85,28 @@ public class UserController extends AbstractController {
 		userfile2.transferTo(file2);
 		
 		return new JsonResult((Object)"OK");
+	}
+	
+	@RequestMapping("/cookie.do")
+	@ResponseBody
+	public JsonResult cookie(HttpServletResponse response,HttpServletRequest request){
 		
-		
-		
+		request.getSession();
+		Cookie cookie = new Cookie("message", "Hello World");
+		response.addCookie(cookie);
+		//服务器向客户端下发cookie
+		return new JsonResult((Object)"OK");
+	}
+	
+	@RequestMapping("/showcookie.do")
+	@ResponseBody
+	public JsonResult showcookie(HttpServletRequest request){
+		//从客户端接收请求中传递的cookie
+		Cookie[] cookies=request.getCookies();
+		for (Cookie cookie : cookies) {
+			System.out.println(cookie);
+		}
+		return new JsonResult((Object)"OK");
 	}
 	
 	

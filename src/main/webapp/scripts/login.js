@@ -30,6 +30,8 @@ function registAction(){
 		if(result.state==SUCCESS){
 			var user = result.data;
 			console.log(user);
+			
+			
 			$('#back').click();
 			$('#count').val(user.name);
 			$('#password').focus();
@@ -85,6 +87,8 @@ function loginAction(){
 		if(result.state==SUCCESS){
 			var user = result.data;
 			console.log(user);
+			
+			addCookie('userId',user.id);
 			location.href='edit.html';
 		}else if(result.state==2){
 			$('#count').next().html(result.message);
