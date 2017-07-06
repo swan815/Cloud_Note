@@ -7,6 +7,9 @@ import com.lsy.note.enity.Note;
 
 public interface NoteDao {
 	List<Map<String,Object>> findNotesByNotebookId(String notebookId);
+	
 	Note findNoteById(String noteId);
+	
+	int addNote(Note note);
 
 }

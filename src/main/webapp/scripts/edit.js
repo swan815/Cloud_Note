@@ -10,7 +10,77 @@ $(function(){
 	//监听笔记列表中的笔记点击事件,在点击时候加载显示笔记信息
 	$('#note-list').on( 'click','.note', loadNote);
 	
+	//在ready方法中绑定事件打开笔记对话框
+	$('#note-list').on('click', '#add_note', showAddNoteDialog);
+	
+	
+	
+	//监听对话框中的关闭和取消按钮
+	//其中 '.close,.cancel' 是组选择器器, 表示
+	//选择 .close 或 .cancel 按钮
+	$('#can').on('click','.close,.cancel',closeDialog)
+	
+	//监听新建笔记对话框中的创建笔记按钮
+	$('#can').on('click','.create-note',addNote);
+	
 });
+
+
+//添加显示对话框方法
+function showAddNoteDialog(){
+    var id = $(document).data('notebookId');
+    if(id){
+        $('#can').load('alert/alert_note.html', function(){
+            $('#input_note').focus();
+        });
+        $('.opacity_bg').show();
+        return;
+    }
+    alert('必须选择笔记本!');
+}
+
+//添加关闭事件处理方法
+function closeDialog(){
+    $('.opacity_bg').hide();
+    $('#can').empty();
+}       
+
+//添加创建笔记事件方法
+function addNote(){
+    var url = 'note/add.do';
+    var notebookId=$(document).data('notebookId');
+    var title = $('#can #input_note').val();
+
+    var data = {userId:getCookie('userId'),
+        notebookId:notebookId,
+        title:title};
+    //console.log(data);
+
+    $.post(url, data, function(result){
+        if(result.state==SUCCESS){
+            var note=result.data;
+            //console.log(note);
+            showNote(note);
+            //找到显示笔记列表的ul对象
+            var ul = $('#note-list ul');
+            //创建新新的笔记列表项目 li 
+            var li = noteTemplate.replace(
+                    '[title]', note.title);
+            li = $(li);
+            //设置选定效果
+            ul.find('a').removeClass('checked');
+            li.find('a').addClass('checked');
+            //插入到笔记列表的第一个位置
+            ul.prepend(li);
+            //关闭添加对话框
+            closeDialog();   
+        }else{
+            alert(result.message);
+        }
+    });
+}
+
+
 
 //添加笔记点击加载笔记的事件处理方法 loadNote
 function loadNote(){
@@ -69,6 +139,8 @@ function loadNotes(){
             alert(result.message);
         }
     });
+  //绑定笔记本ID， 用于添加笔记功能 
+    $(document).data('notebookId', li.data('notebookId'))
 }
 
 /** 将笔记列表信息显示到屏幕上 */

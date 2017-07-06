@@ -36,6 +36,13 @@ public class NoteController extends AbstractController{
 		return new JsonResult(note);
 	}
 	
+	@RequestMapping("/add.do")
+	@ResponseBody
+	public JsonResult add(String userId, String notebookId, String title) {
+	    Note note = noteService.addNote(userId, notebookId, title);
+	    return new JsonResult(note);
+	}
+	
 	
 
 }

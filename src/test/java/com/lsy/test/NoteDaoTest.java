@@ -2,7 +2,6 @@ package com.lsy.test;
 
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,9 +32,6 @@ public class NoteDaoTest extends BaseTest {
 		String noteId="019cd9e1-b629-4d8d-afd7-2aa9e2d6afe0";
 		Note note = dao.findNoteById(noteId);
 		System.out.println(note);
-		
 	}
-	
-	
 
 }

@@ -36,6 +36,13 @@ public class UserDaoTest{
 	}
 	
 	@Test
+	public void testFindUserById(){
+		String userId="48595f52-b22c-4485-9244-f4004255b972";
+		User user = dao.findUserById(userId);
+		System.out.println(user);
+	}
+	
+	@Test
 	public void testAddUser(){
 		String id = UUID.randomUUID().toString();
 		String name="Jerry";
