@@ -47,6 +47,12 @@
 		<property name="basePackage" value="com.lsy.note.dao"></property>
 		
 	</bean>
+	<!-- 配置事务管理器 -->
+	<bean id="txManager" class="">
+	</bean>
+	
+	<!-- 设置注解驱动的事务管理 -->
+	
 </beans>
 
 

@@ -15,5 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	order by
 		cn_notebook_createtime desc
 	</select>
+	
+	<select id="countNotebookById" parameterType="string" resultType="int">
+		select
+			count(*) as cnt
+		from
+			cn_notebook
+		where
+			cn_notebook_id=#{notebookId}
+	</select>
 
 </mapper>

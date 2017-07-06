@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		
+		$('#sp').click(function(){
+			console.log("span click!");
+		});
+		
+		$('#p').click(function(){
+			console.log("p click!");
+		});
+		
+		$('#content').click(function(){
+			console.log("div click!");
+		});
+		
+	});
+	
+	
+
+</script>
+</head>
+<body>
+	<div>
+		<h1>事件冒泡</h1>
+	</div>
+	<div id="content">
+		<h2>事件</h2>
+		<p id="p">
+			<span id="sp">事件测试</span>
+		<p>
+	</div>
+
+</body>
+</html>
