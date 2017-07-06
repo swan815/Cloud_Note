@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.lsy.note.dao.NoteDao;
 import com.lsy.note.dao.NotebookDao;
+import com.lsy.note.enity.Note;
+import com.lsy.note.service.NoteNotFoundException;
 import com.lsy.note.service.NoteService;
 import com.lsy.note.service.NotebookNoteFoundException;
 
@@ -33,6 +35,19 @@ public class NoteServiceImpl implements NoteService {
 			throw new NotebookNoteFoundException("没有笔记本");
 		}
 		return noteDao.findNotesByNotebookId(notebookId);
+	}
+
+
+	public Note getNote(String noteId) 
+			throws NoteNotFoundException {
+		if (noteId==null || noteId.trim().isEmpty()) {
+			throw new NoteNotFoundException("ID空");
+		}
+		Note note = noteDao.findNoteById(noteId);
+		if(note==null){
+			throw new NoteNotFoundException("ID错误");
+		}
+		return note;
 	}
 
 }

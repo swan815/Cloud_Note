@@ -7,8 +7,44 @@ $(function(){
 	
 	$('#notebook-list').on('click','.notebook',loadNotes);
 	
+	//监听笔记列表中的笔记点击事件,在点击时候加载显示笔记信息
+	$('#note-list').on( 'click','.note', loadNote);
 	
 });
+
+//添加笔记点击加载笔记的事件处理方法 loadNote
+function loadNote(){
+    //获取当前点击的 li 元素
+    var li = $(this);
+    //获取在显示时候绑定到li中的笔记ID值
+    var id = li.data('noteId');
+
+    //设置选中高亮效果
+    li.parent().find('a').removeClass('checked');
+    li.find('a').addClass('checked');
+
+    var url = 'note/load.do';
+    var data= {noteId: id };
+
+    $.getJSON(url, data, function(result){
+        //console.log(result);
+        if(result.state==SUCCESS){
+            var note = result.data;
+            showNote(note);
+        }else{
+            alert(result.message);
+        }
+    });
+}
+
+//添加显示笔记信息方法 showNote
+function showNote(note){
+    //显示笔记标题
+    $('#input_note_title').val(note.title);
+    //显示笔记内容
+    um.setContent(note.body);
+}
+
 
 function loadNotes(){
 	var li = $(this);//当前被点击的对象li
@@ -46,11 +82,13 @@ function showNotes(notes){
         var li = noteTemplate.replace(
                 '[title]', note.title);
         li = $(li);
+      //将笔记ID绑定到li, 用在点击笔记时候显示笔记详细信息
+        li.data('noteId', note.id);
         ul.append(li);
     }
 }
 
-var noteTemplate = '<li class="online">'+
+var noteTemplate = '<li class="online note">'+
     '<a>'+
     '<i class="fa fa-file-text-o" title="online" rel="tooltip-bottom"></i> [title]<button type="button" class="btn btn-default btn-xs btn_position btn_slide_down"><i class="fa fa-chevron-down"></i></button>'+
     '</a>'+

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.lsy.note.enity.Note;
 import com.lsy.note.service.NoteService;
 
 public class NoteServiceTest extends BaseTest {
@@ -24,6 +25,13 @@ public class NoteServiceTest extends BaseTest {
 		for (Map<String, Object> map : list) {
 			System.out.println(map);
 		}
+	}
+	
+	@Test
+	public void testGetNote(){
+		String noteId="019cd9e1-b629-4d8d-afd7-2aa9e2d6afe0";
+		Note note = service.getNote(noteId);
+		System.out.println(note);
 	}
 
 }

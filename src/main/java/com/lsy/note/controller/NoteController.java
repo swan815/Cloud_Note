@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lsy.note.enity.Note;
 import com.lsy.note.service.NoteService;
 import com.lsy.note.util.JsonResult;
 
@@ -26,7 +27,13 @@ public class NoteController extends AbstractController{
 		List<Map<String,Object>> list=noteService.listNotes(notebookId);
 		
 		return new JsonResult(list);
-		
+	}
+	
+	@RequestMapping("/load.do")
+	@ResponseBody
+	public JsonResult load(String noteId){
+		Note note = noteService.getNote(noteId);
+		return new JsonResult(note);
 	}
 	
 	
